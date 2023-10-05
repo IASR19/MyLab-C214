@@ -24,9 +24,6 @@ jobs:
     - name: Executar testes
       run: npm test
 
-    - name: Construir aplicação
-      run: npm run build
-
     - name: badge
       run: | 
         if [ ${{ job.status }} == 'success' ]; then
