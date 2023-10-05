@@ -1,0 +1,42 @@
+name: Aula CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v2
+
+    - name: Configurar Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Instalar dependências
+      run: npm install
+
+    - name: Executar testes
+      run: npm test
+
+    - name: Construir aplicação
+      run: npm run build
+
+    - name: badge
+      run: | 
+        if [ ${{ job.status }} == 'success' ]; then
+            echo "![CI](https://img.shields.io/badge/CI-Passing-brightgreen)" > badge.md
+        else
+            echo "![CI](https://img.shields.io/badge/CI-Failing-red)" > badge.md
+        fi
+      shell: bash
+
+    - name: Insert badge in README
+      run: cat badge.md >> README.md
+    
+
