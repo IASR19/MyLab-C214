@@ -24,16 +24,3 @@ jobs:
     - name: Executar testes
       run: npm test
 
-    - name: badge
-      run: | 
-        if [ ${{ job.status }} == 'success' ]; then
-            echo "![CI](https://img.shields.io/badge/CI-Passing-brightgreen)" > badge.md
-        else
-            echo "![CI](https://img.shields.io/badge/CI-Failing-red)" > badge.md
-        fi
-      shell: bash
-
-    - name: Insert badge in README
-      run: cat badge.md >> README.md
-    
-
